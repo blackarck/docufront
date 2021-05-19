@@ -30,7 +30,8 @@ export class ReqformComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.callPsoftData();
+    // this.callPsoftData(); //make sure test server is up
+    this.callPdfWrite();
   }
 
   callPsoftData(){
@@ -51,7 +52,7 @@ export class ReqformComponent implements OnInit {
          'authorization': usridtoken
        })
      };//end of httpoptions
-     console.log("Returning http response");
+     // console.log("Returning http response");
      this.http.get<any>(posturl, httpOptions).subscribe(
       (res)=> {
         console.log("res is "+JSON.stringify(res));
@@ -78,4 +79,32 @@ export class ReqformComponent implements OnInit {
     
   }//end of callpsoftdatapost
 
+  callPdfWrite(){
+    const APIendpoint = environment.APIEndpoint;
+    const posturl=APIendpoint+'/api/createsignpdf/getpsoftdata';
+    let usridtoken:any;
+
+    this.auth.idToken.subscribe((res)=>{
+      usridtoken=res;
+      //console.log("Id token recieved " +usridtoken );
+    
+     // console.log("Id token recieved " +usridtoken );
+     let httpOptions = {
+       headers: new HttpHeaders({
+         'Content-Type':  'application/json',
+         'Access-Control-Allow-Origin':'*',
+         'Access-Control-Allow-Methods': 'GET, POST, PUT',
+         'authorization': usridtoken
+       })
+     };//end of httpoptions
+     this.http.get<any>(posturl, httpOptions).subscribe(
+      (res)=> {
+      } ,
+      (err)=> {
+        
+        console.log(err.error.message);
+      }
+    );
+  });
+  }//end of function write pdf
 }//end of class
