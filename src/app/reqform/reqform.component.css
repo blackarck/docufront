@@ -1,0 +1,22 @@
+.topbody {
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.emplapprvsec {
+    max-width: 500px;
+}
+
+.namehdr {
+    font-size: large;
+}
+
+.namefootr {
+    font-size: small;
+}
+
+.itemdescr {
+    padding-top: 40px;
+    max-width: 350px;
+    padding-bottom: 40px;
+}

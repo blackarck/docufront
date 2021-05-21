@@ -1,16 +1,39 @@
-<H2>Requisition Form</H2>
-
-<div>
-    <h3><b> Employee Details </b></h3>
-    <p> Employee ID - {{emplid}}</p>
-    <p> Employee Name - {{empname}}</p>
-    <p> Employee Email id - {{empemailid}}</p>
+<div class="topbody">
+    <H2>Requisition Form</H2>
+    <div style="font-size:small; padding-bottom: 30px;;">Complete a new requisition form. Approver details will be updated upon selection of item</div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="emplapprvsec">
+        <div class="emplheader">
+            <h3><b> Employee Details </b></h3>
+            <div class="namehdr">
+                {{empname}}
+            </div>
+            <div fxLayout="row" class="namefootr">
+                {{emplid}} {{empemailid}}
+            </div>
+        </div>
+        <div class="apprvrheader">
+            <h3><b>Approver Details</b> </h3>
+            <div class="namehdr">
+                {{approvername}}
+            </div>
+            <div fxLayout="row" class="namefootr">
+                {{approverid}} {{approveremail}}
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="itemdescr">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Item List</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="food" (selectionChange)="itemselected(selectedValue)">
+                    <mat-option *ngFor="let itemlists of itemlist" [value]="itemlists">
+                        {{itemlists.descr}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="amountdtl">Amount : ${{selectedValue?.value}}</div>
+    </div>
+    {{messagetxt}}
+    <button mat-stroked-button color="primary" (click)="submitform()" [disabled]="submitdisable">Submit</button>
 </div>
-<div>
-    <h3><b>Approver Details</b> </h3>
-    <p> Sup ID - {{supid}}</p>
-    <p> Sup Name - {{supname}}</p>
-    <p> Sup Email id - {{supemailid}}</p>
-</div>
-
-<button mat-button color="primary">Save Form</button>
