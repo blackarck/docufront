@@ -23,13 +23,13 @@ export class ReqformComponent implements OnInit {
   loginuser:user=new user();
   emplid="1002";
   empname="Nancy Drew";
-  empemailid="nancy@drew.com";
+  empemailid="blackarck@gmail.com";
   supid="1001";
   supname="Sherlock Holmes";
-  supemailid="sherlock@holmes.com";
+  supemailid="sirmondatawriter@gmail.com";
   hodid="2002";
   hodname="Conan Doyle"
-  hodemail="conan@doyle.com";
+  hodemail="sirmondatawriter@gmail.com";
 
   approverid;
   approveremail;
