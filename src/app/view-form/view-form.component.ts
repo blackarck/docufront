@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import {UserServiceService} from '../service/user-service.service';
 import { environment } from '../../environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {AngularFireAuth} from '@angular/fire/auth';
-
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-view-form',
@@ -12,7 +12,13 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class ViewFormComponent implements OnInit {
 
-  constructor(private userService: UserServiceService,private http: HttpClient,public auth: AngularFireAuth,) { 
+  custarr= [];
+  custarr1=[];
+  dataSource = new MatTableDataSource( this.custarr1);
+  displayedColumns: string[] = ['formid','apprvname','apprvemailid','itemdescr','itemvalue','requestdttm','formsts'];
+
+  constructor(private userService: UserServiceService,private http: HttpClient,public auth: AngularFireAuth,
+    private changeDetectorRefs: ChangeDetectorRef , ) { 
     this.getFormData();
   }
 
@@ -40,7 +46,13 @@ export class ViewFormComponent implements OnInit {
       this.http.get<any>(posturl, httpOptions).subscribe(
         (res)=> {
         
-          console.log("res is "+JSON.stringify(res));
+          console.log("res is "+JSON.stringify(res.content));
+         
+          for(var i in res.content){
+            var form1:formdata=res.content[i];
+            this.custarr.push(form1);
+          }//end of for
+          this.dataSource = new MatTableDataSource( this.custarr);
         } ,
         (err)=> {
           
@@ -51,4 +63,19 @@ export class ViewFormComponent implements OnInit {
     });
 
   }//end of getFormData
+
+  applyFilter(filterValue: { target: HTMLInputElement }) {
+    this.dataSource.filter = (filterValue.target).value.trim().toLowerCase();
+  }
+
 }//end of class
+
+export class formdata{
+  formid:String;
+  apprvname:String ;
+  apprvemailid:String ;
+  itemdescr:String;
+  itemvalue:Number;
+  requestdttm:String;
+  formsts:string;
+};

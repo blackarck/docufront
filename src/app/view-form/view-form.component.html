@@ -1,1 +1,47 @@
-<p>view-form works!</p>
+ <H2>Submitted form status</H2>
+ <!-- show customer table here -->
+ 
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="formid">
+        <th mat-header-cell *matHeaderCellDef> Form ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.formid}} </td>
+    </ng-container>
+
+    <!-- Approver name Column -->
+    <ng-container matColumnDef="apprvname">
+        <th mat-header-cell *matHeaderCellDef> Approver Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.apprvname}} </td>
+    </ng-container>
+
+    <!-- Approver email  Column -->
+    <ng-container matColumnDef="apprvemailid">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.apprvemailid}} </td>
+    </ng-container>
+
+       <!-- Item descr  Column -->
+       <ng-container matColumnDef="itemdescr">
+        <th mat-header-cell *matHeaderCellDef> Item Descr </th>
+        <td mat-cell *matCellDef="let element"> {{element.itemdescr}} </td>
+    </ng-container>
+       <!-- form status Column -->
+       <ng-container matColumnDef="itemvalue">
+        <th mat-header-cell *matHeaderCellDef> Value </th>
+        <td mat-cell *matCellDef="let element"> {{element.itemvalue}} </td>
+    </ng-container>
+        <!-- Create dttm Column -->
+        <ng-container matColumnDef="requestdttm">
+            <th mat-header-cell *matHeaderCellDef> Create Dt </th>
+            <td mat-cell *matCellDef="let element"> {{element.requestdttm}} </td>
+        </ng-container>
+      <!-- form status Column -->
+      <ng-container matColumnDef="formsts">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.formsts}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

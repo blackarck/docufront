@@ -182,7 +182,10 @@ export class ReqformComponent implements OnInit {
    const dialogRef = this.dialog.open(SubmitDialog, {
     width: '400px'}
   );
-  this.router.navigate(['./viewform'], { relativeTo: this.route.parent});
+ 
+    this.router.navigate(['./viewform'], { relativeTo: this.route.parent});
+  
+  
   }//end of submit form
 }//end of class
 
